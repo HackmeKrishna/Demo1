@@ -1,0 +1,70 @@
+<div class="lll">
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>COURSE</th>
+        <th>GENDER</th>
+        <th>ADDRESS</th>
+        <th width="250px">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.id }}</td>
+        <td>
+          <ng-container *ngIf="!student.editing; else editModeName">
+            {{ student.name }}
+          </ng-container>
+    
+          <ng-template #editModeName>
+            <input type="text" [(ngModel)]="student.name">
+          </ng-template>
+        </td>
+        <td>
+          <ng-container *ngIf="!student.editing; else editModeCourse">
+            {{ student.course }}
+          </ng-container>
+    
+          <ng-template #editModeCourse>
+            <input type="text" [(ngModel)]="student.course">
+          </ng-template>
+        </td>
+        <td>
+          <ng-container *ngIf="!student.editing; else editModeGender">
+            {{ student.gender }}
+          </ng-container>
+    
+          <ng-template #editModeGender>
+            <input type="text" [(ngModel)]="student.gender">
+          </ng-template>
+        </td>
+        <td>
+          <ng-container *ngIf="!student.editing; else editModeAddress">
+            {{ student.address }}
+          </ng-container>
+    
+          <ng-template #editModeAddress>
+            <input type="text" [(ngModel)]="student.address">
+          </ng-template>
+        </td>
+
+        <td>
+          <ng-container *ngIf="!student.editing; else saveCancelMode">
+            <button type="button" class="btn btn-warning" (click)="EditStudent(student)">Edit</button>
+          </ng-container>
+    
+          <ng-template #saveCancelMode>
+            <button type="button" class="btn btn-success" (click)="SaveStudent(student)">Save</button>
+            <button type="button" class="btn btn-secondary" (click)="CancelEdit(student)">Cancel</button>
+          </ng-template>
+          <button class="button btn-danger" (click)="DeleteStudent(student.id)">Delete</button>
+        </td>
+          
+        
+      </tr>
+    </tbody>
+  </table>
+</div>
